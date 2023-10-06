@@ -1,0 +1,50 @@
+
+<div class="col-xl-12 col-md-12">
+  <div class="card table-card">
+    <div class="card-header">
+      <h5>Danh sách dự án</h5>
+      <div class="card-header-right">
+        <ul class="list-unstyled card-option">
+          <li><i class="fa fa fa-wrench open-card-option"></i></li>
+          <li><i class="fa fa-window-maximize full-card"></i></li>
+          <li><i class="fa fa-minus minimize-card"></i></li>
+          <li><i class="fa fa-refresh reload-card"></i></li>
+          <li><i class="fa fa-trash close-card"></i></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-block">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên dự án</th>
+              <th>Ngày bắt đầu</th>
+              <th >Chi phí dự án</th>
+              <th>Leader</th>
+              <th colspan="3">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let da of duan | paginate: { itemsPerPage: itemsPerPage, currentPage: p}">
+              <td> {{da.id}} </td>
+              <td [routerLink]="['/duan', da.id]"> {{da.tenDuAn}}</td>
+              <td> {{da.ngayStart | date:'dd/MM/yyyy'}}</td>
+              <td> {{da.tien | number: '1.3-3' }} VNĐ</td>
+              <th>{{ getLeaderName(da.leader)}}</th>
+              <td>
+                <a href="" [routerLink]="['/duan/sua', da.id]">Sửa</a> &nbsp;
+                <a href="" [routerLink]="['/admin/suaReactive', da.id]">Sửa bằng Reactive</a> &nbsp;
+                <a href="" (click)="deleteProject(da.id)">Xoá</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

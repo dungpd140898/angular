@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-sm-12">
+    <!-- Basic Form Inputs card start -->
+    <div class="card">
+      <div class="card-block">
+        <h4 class="sub-title">Thêm Task</h4>
+        <form [formGroup]="form" (ngSubmit)="themTask()">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Tên Task</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="tenTask" name="tenTask" formControlName="tenTask" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Mô tả</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="moTa" name="moTa" formControlName="moTa" required>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Độ ưu tiên</label>
+            <div class="col-sm-10">
+              <select name="priority" id="priority" class="form-control"  formControlName="priority" required>
+                <option *ngFor="let priority of prioritys" [value]="priority.id">{{ priority.namePriority }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Dự án</label>
+            <div class="col-sm-10">
+              <select name="duAnID" id="duAnID" class="form-control" formControlName="duAnID" required>
+                <option *ngFor="let project of projects" [value]="project.id">{{ project.tenDuAn }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Danh sach nhân viên</label>
+            <div class="col-sm-10">
+              <select name="nhanvienID" id="nhanvienID" class="form-control" formControlName="nhanvienID" required>
+                <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.ho }} {{ employee.ten }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" id="themDuAnBtn" >Thêm task</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<!-- Trong file nv-list.component.html -->
+<div class="col-xl-12 col-md-12">
+  <div class="card table-card">
+    <div class="card-header">
+      <h5>Danh sách nhân viên</h5>
+      <div class="card-header-right">
+        <ul class="list-unstyled card-option">
+          <li><i class="fa fa fa-wrench open-card-option"></i></li>
+          <li><i class="fa fa-window-maximize full-card"></i></li>
+          <li><i class="fa fa-minus minimize-card"></i></li>
+          <li><i class="fa fa-refresh reload-card"></i></li>
+          <li><i class="fa fa-trash close-card"></i></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-block">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th> Id </th>
+              <th> Họ tên</th>
+              <th> Ngày sinh </th>
+              <th> Giới tính</th>
+              <th> Khu vực</th>
+              <th colspan="3">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let nv of nhanvien | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+              <td> {{nv.id}} </td>
+              <td> {{nv.ho}} {{nv.ten}}</td>
+              <td> {{nv.ngaysinh | date:'dd/MM/yyyy' }}</td>
+              <td> {{getGenderName(nv.phai)}}</td>
+              <td> {{getKhuVucName(nv.khuvuc)}}</td>
+              <td>
+                <a href="" [routerLink]="['/admin/updatenv', nv.id]">Sửa</a> &nbsp;
+                <a href="" [routerLink]="['/admin/updatenvReactive', nv.id]">Sửa bằng Reactive</a> &nbsp;
+                <a href="" (click)="xoaNV(nv.id)">Xoá</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-end">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

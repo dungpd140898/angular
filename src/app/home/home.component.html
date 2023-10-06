@@ -1,0 +1,190 @@
+<div class="pcoded-inner-content">
+  <!-- Main-body start -->
+  <div class="main-body">
+    <div class="page-wrapper">
+      <!-- Page-body start -->
+      <div class="page-body">
+        <div class="row">
+          <!-- task, page, download counter  start -->
+          <div class="col-xl-3 col-md-6" routerLink="duan">
+            <div class="card">
+              <div class="card-block">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h4 class="text-c-purple">{{ numberOfProjects }}</h4>
+                    <h6 class="text-muted m-b-0">Dự án</h6>
+                  </div>
+                  <div class="col-4 text-right">
+                    <i class="fa fa-bar-chart f-28"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-c-purple">
+                <div class="row align-items-center">
+                  <div class="col-9">
+                    <p class="text-white m-b-0">% change</p>
+                  </div>
+                  <div class="col-3 text-right">
+                    <i class="fa fa-line-chart text-white f-16"></i>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6" routerLink="nhanvien">
+            <div class="card">
+              <div class="card-block">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h4 class="text-c-green">{{ totalNv }}</h4>
+                    <h6 class="text-muted m-b-0">Số lượng thành viên</h6>
+                  </div>
+                  <div class="col-4 text-right">
+                    <i class="fa fa-file-text-o f-28"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-c-green">
+                <div class="row align-items-center">
+                  <div class="col-9">
+                    <p class="text-white m-b-0">% change</p>
+                  </div>
+                  <div class="col-3 text-right">
+                    <i class="fa fa-line-chart text-white f-16"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6" routerLink="task">
+            <div class="card">
+              <div class="card-block">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h4 class="text-c-red">{{ totalTask }}</h4>
+                    <h6 class="text-muted m-b-0">Task </h6>
+                  </div>
+                  <div class="col-4 text-right">
+                    <i class="fa fa-calendar-check-o f-28"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-c-red">
+                <div class="row align-items-center">
+                  <div class="col-9">
+                    <p class="text-white m-b-0">% change</p>
+                  </div>
+                  <div class="col-3 text-right">
+                    <i class="fa fa-line-chart text-white f-16"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card">
+              <div class="card-block">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h4 class="text-c-blue">{{ totalMoney | number: '1.' }} K</h4>
+                    <h6 class="text-muted m-b-0">Tổng chi phí</h6>
+                  </div>
+                  <div class="col-4 text-right">
+                    <i class="fa fa-hand-o-down f-28"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-c-blue">
+                <div class="row align-items-center">
+                  <div class="col-9">
+                    <p class="text-white m-b-0">% change</p>
+                  </div>
+                  <div class="col-3 text-right">
+                    <i class="fa fa-line-chart text-white f-16"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- task, page, download counter  end -->
+          <!-- Trong file nv-list.component.html -->
+          <div class="col-xl-8 col-md-12">
+            <div class="card table-card">
+              <div class="card-header">
+                <h5>Danh sách nhân viên</h5>
+                <div class="card-header-right">
+                  <ul class="list-unstyled card-option">
+                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                    <li><i class="fa fa-minus minimize-card"></i></li>
+                    <li><i class="fa fa-refresh reload-card"></i></li>
+                    <li><i class="fa fa-trash close-card"></i></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-block">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th> Id </th>
+                        <th> Họ tên</th>
+                        <th> Ngày sinh </th>
+                        <th> Giới tính</th>
+                        <th> Khu vực</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let nv of nhanvien | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                        <td> {{nv.id}} </td>
+                        <td> {{nv.ho}} {{nv.ten}}</td>
+                        <td> {{nv.ngaysinh | date:'dd/MM/yyyy'}}</td>
+                        <td> {{nv.phai ? 'Nam' : 'Nữ'}}</td>
+                        <td> {{nv.khuvuc}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="d-flex justify-content-end">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-12">
+            <div class="card ">
+              <div class="card-header">
+                <h5>Team leader</h5>
+                <div class="card-header-right">
+                  <ul class="list-unstyled card-option">
+                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                    <li><i class="fa fa-minus minimize-card"></i></li>
+                    <li><i class="fa fa-refresh reload-card"></i></li>
+                    <li><i class="fa fa-trash close-card"></i></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-block" *ngFor="let leader of listLeader">
+                <div class="align-middle m-b-30">
+                  <img src="assets/images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
+                  <div class="d-inline-block">
+                    <h6>{{ leader.name }}</h6>
+                    <p class="text-muted m-b-0">Developer</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!--  project and team member end -->
+        </div>
+      </div>
+      <!-- Page-body end -->
+    </div>
+    <div id="styleSelector"> </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+
+<div class="col-xl-12 col-md-12">
+  <div class="card table-card">
+      <div class="card-header">
+          <h5>Danh sách task</h5>
+          <div class="card-header-right">
+              <ul class="list-unstyled card-option">
+                  <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                  <li><i class="fa fa-window-maximize full-card"></i></li>
+                  <li><i class="fa fa-minus minimize-card"></i></li>
+                  <li><i class="fa fa-refresh reload-card"></i></li>
+                  <li><i class="fa fa-trash close-card"></i></li>
+              </ul>
+          </div>
+      </div>
+      <div class="card-block">
+          <div class="table-responsive">
+              <table class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th>Id Task</th>
+                      <th>Task</th>
+                      <th>Dự án</th>
+                      <th>Người thực hiện</th>
+                      <th>Độ ưu tiên</th>
+                      <th>Trạng thái</th>
+                      <th colspan="3">Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let task of tasks | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                    <td>{{ task.id }}</td>
+                      <td>
+
+                          <div class="d-inline-block align-middle">
+
+                              <div class="d-inline-block">
+                                  <h5>{{task.tenTask}}</h5>
+                                  <p >({{task.moTa}})</p>
+                              </div>
+                          </div>
+                      </td>
+                      <td>{{getDuAnName(task.duAnID)}}</td>
+                      <td>{{ getEmployeeName(task.nhanvienID) }}</td>
+                      <td>{{ getPriorityName(task.priority) }}</td>
+                      <td>{{ getStatusName(task.status) }}</td>
+                      <td>
+                        <a href="" [routerLink]="['/task/sua', task.id]">Sửa</a> &nbsp;
+                        <a href="" [routerLink]="['/task/suareactive', task.id]">Sửa bằng Reactive</a> &nbsp;
+                        <a href="" (click)="xoaTask(task.id)">Xoá</a>
+                      </td>
+                  </tbody>
+              </table>
+              <div class="d-flex justify-content-end">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
